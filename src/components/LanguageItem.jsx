@@ -18,7 +18,6 @@ const LanguageItem = ({ givenLanguage }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.langtext}>{givenLanguage}</Text>
-            
         </View>
     )
 };
