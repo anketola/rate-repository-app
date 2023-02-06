@@ -6,6 +6,7 @@ const theme = {
     inverted: '#FAF9F6',
     light: '#D0D0D0',
     muted: '#5B5B5B',
+    errorColor: '#d73a4a',
     mainBackground: '#e1e4e8',
     appBarTitle: '#FAF9F6',
     appBarBackground: '#24292e'
