@@ -6,7 +6,6 @@ const useRepositories = () => {
         fetchPolicy: 'cache-and-network',
         // Other options
         });
-    // const response = await fetch('http://192.168.1.105:5000/api/repositories'); 
     const repositories = data?.repositories
     
 
