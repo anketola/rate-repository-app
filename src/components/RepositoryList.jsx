@@ -5,7 +5,7 @@ import useRepositories from '../hooks/useRepositories';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.mainBackground
+    backgroundColor: theme.colors.mainBackground    
   },
   separator: {
     backgroundColor: theme.colors.mainBackground,

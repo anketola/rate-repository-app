@@ -23,7 +23,7 @@ export const GET_REPOSITORIES = gql`
           forksCount   
           ownerAvatarUrl
           description
-          language        
+          language          
         }
         cursor
       }
@@ -36,6 +36,26 @@ export const GET_USER = gql`
     me {
       id
       username
+    }
+  }
+`;
+
+export const GET_ONEREPOSITORY = gql`
+  query GetRepository ($id: ID!) {
+    repository(id: $id) {
+      id
+      ownerName
+      name        
+      createdAt
+      fullName        
+      ratingAverage
+      reviewCount
+      stargazersCount        
+      forksCount   
+      ownerAvatarUrl
+      description
+      language
+      url
     }
   }
 `;
