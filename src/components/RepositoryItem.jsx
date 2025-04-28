@@ -49,9 +49,9 @@ const RepositoryItem = ({ data, singleView }) => {
             }}
           />
         <View style={{ display: 'flex', flexDirection: 'column', paddingTop: 3, paddingLeft: 15, paddingRight: 10, justifyContent: 'space-between', flex: 1 }}>
-            <Text testID="fullName" style={{ fontWeight: 'bold', padding: 4}}>{data.fullName}</Text>
-            <Text testID="description" style={{ color: theme.colors.muted, padding: 4, flexWrap: 'wrap', flexShrink: 1}}>{data.description}</Text>
-            <View testID="language" style={{ display: 'flex', flexDirection: 'row', padding: 4 }}>
+            <Text testID="fullName" style={{ fontWeight: 'bold', padding: 2}}>{data.fullName}</Text>
+            <Text testID="description" style={{ color: theme.colors.muted, padding: 2, flexWrap: 'wrap', flexShrink: 1}}>{data.description}</Text>
+            <View testID="language" style={{ display: 'flex', flexDirection: 'row', paddingTop:2, paddingBottom: 2 }}>
                 <LanguageItem givenLanguage={data.language} />
             </View>                
         </View>
