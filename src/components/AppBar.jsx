@@ -47,14 +47,21 @@ const AppBar = () => {
           </Text>
         </Link>
         {isSignedIn ? (
-          <Link>
-            <Text 
-              style={styles.text}
-              onPress={handleSignOut}
-              >
-                Sign out
-            </Text>
-          </Link>            
+          <>
+            <Link to="/addreview">
+              <Text style={styles.text}>
+                  Create a review
+              </Text>
+              </Link>   
+            <Link>
+              <Text 
+                style={styles.text}
+                onPress={handleSignOut}
+                >
+                  Sign out
+              </Text>
+            </Link>
+          </>            
         ) : (
         <Link to="/signin">
           <Text style={styles.text}>
