@@ -12,10 +12,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 60,
     padding: 20
-  },
-  button: {
-    height: 60
-  },
+  },  
   container: {
     display: 'flex',
     direction: 'column',

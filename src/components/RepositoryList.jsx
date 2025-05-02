@@ -41,7 +41,7 @@ const SortingHeader = ({ handleSortChange, sortingType, handleSearchChange, sear
       />
       <Picker
         selectedValue={sortingType}
-        onValueChange={(itemValue, itemIndex) => {
+        onValueChange={(itemValue) => {
           handleSortChange(itemValue)
         }}>
         <Picker.Item label="Select an item.." value="" enabled={false} />

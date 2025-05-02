@@ -6,7 +6,7 @@ const formatNumber = ( toFormat ) => {
       let eka = desimaali.toString().substring(0, 1);
       let tuhannet = Math.floor(toFormat / 1000);
       return tuhannet + '.' + eka + 'k';
-    };
+    }
   }
 
 export default formatNumber;

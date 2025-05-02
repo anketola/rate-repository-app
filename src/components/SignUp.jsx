@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
     height: 60,
     padding: 20
   },
-  button: {
-    height: 60
-  },
   container: {
     display: 'flex',
     direction: 'column',
