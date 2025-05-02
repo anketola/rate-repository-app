@@ -1,9 +1,10 @@
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, TextInput } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import theme from '../theme';
 import useRepositories from '../hooks/useRepositories';
 import {Picker} from '@react-native-picker/picker';
 import { useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,16 +14,34 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.mainBackground,
       height: 10
 },
+input: {
+  borderWidth: 2,
+  borderRadius: 9,
+  backgroundColor: '#ffffff',
+  height: 60,
+  padding: 20,
+  marginLeft: 15,
+  marginRight: 15,
+  marginTop: 15
+},
 });
 
-const SortingHeader = ({ handleSortChange, sortingType }) => {
+const SortingHeader = ({ handleSortChange, sortingType, handleSearchChange, searchString  }) => {
+  
   
   return(
-    <View style={{ flex: 1, backgroundColor: theme.colors.mainBackground, height: 60, justifyContent: 'center'}}>      
+    <View style={{ flex: 1, backgroundColor: theme.colors.mainBackground, height: 120, justifyContent: 'center'}}>      
+      <TextInput
+        style={[styles.input]}
+        placeholder="Search"
+        value={searchString}
+        onChangeText={(itemValue) => {
+          handleSearchChange(itemValue);
+        }}
+      />
       <Picker
         selectedValue={sortingType}
         onValueChange={(itemValue, itemIndex) => {
-          //setSortingSettings(itemValue)
           handleSortChange(itemValue)
         }}>
         <Picker.Item label="Select an item.." value="" enabled={false} />
@@ -37,7 +56,13 @@ const SortingHeader = ({ handleSortChange, sortingType }) => {
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, sortingType, handleSortChange }) => {
+export const RepositoryListContainer = ({ 
+  repositories, 
+  sortingType, 
+  searchString, 
+  handleSortChange, 
+  handleSearchChange
+}) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -48,7 +73,13 @@ export const RepositoryListContainer = ({ repositories, sortingType, handleSortC
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({item}) => <RepositoryItem data={item} />}
       keyExtractor={item => item.id}
-      ListHeaderComponent={<SortingHeader sortingType={sortingType} handleSortChange={handleSortChange} />}
+      ListHeaderComponent={
+      <SortingHeader 
+        sortingType={sortingType} 
+        handleSortChange={handleSortChange}  
+        searchString={searchString} 
+        handleSearchChange={handleSearchChange}
+      />}
     />
   );
 };
@@ -56,7 +87,9 @@ export const RepositoryListContainer = ({ repositories, sortingType, handleSortC
 const RepositoryList = () => {
   
   const [sortingType, setSortingType] = useState("latest");
-  
+  const [searchString, setSearchString] = useState("");
+  const [debounceValue] = useDebounce(searchString, 500);
+
   let queryArguments;
 
   if (sortingType === "latest") {
@@ -75,10 +108,23 @@ const RepositoryList = () => {
       orderDirection: "ASC"
     }
   } 
+  if (searchString !== '') {
+    queryArguments = {
+      ...queryArguments,
+      searchKeyword: debounceValue
+    }
+  }
+
 
   const { repositories } = useRepositories(queryArguments);
 
-  return <RepositoryListContainer repositories={repositories} sortingType={sortingType} handleSortChange={setSortingType}/>;
+  return <RepositoryListContainer 
+    repositories={repositories} 
+    sortingType={sortingType} 
+    searchString={searchString} 
+    handleSearchChange={setSearchString} 
+    handleSortChange={setSortingType}
+    />;
 };
 
 
