@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ONEREPOSITORY, GET_REVIEWS } from "../graphql/queries";
 import Text from "./Text";
 import theme from '../theme';
-import { format } from "date-fns";
+import ReviewItem from './ReviewItem';
 
 const styles = StyleSheet.create({ 
   separator: {
@@ -39,20 +39,6 @@ const RepositoryInfo = ({ repository }) => {
   );
 };
 
-const ReviewItem = ({ review }) => {
-  return(
-    <View style={{ flex: 1, flexDirection: 'row'}}>
-      <View style={ styles.ratingCircle }>
-        <Text style= { styles.ratingText }>{review.rating}</Text>
-      </View>  
-      <View style={{ flex: 1, flexDirection: 'column'}}>
-        <Text style={{ fontWeight: theme.fontWeights.bold, paddingTop: 10 }}>{review.user.username}</Text>    
-        <Text style={{ fontWeight: theme.fontWeights.light, paddingBottom: 2}}>{format(review.createdAt, "dd.MM.yyyy")}</Text>
-        <Text style={{ fontWeight: theme.fontWeights.normal, paddingBottom: 10, paddingRight: 5}}>{review.text}</Text>
-        </View>            
-    </View>    
-  )
-};
 
 const SingleRepository = () => {
   let { id } = useParams();

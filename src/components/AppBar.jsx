@@ -50,10 +50,15 @@ const AppBar = () => {
           <>
             <Link to="/addreview">
               <Text style={styles.text}>
-                  Create a review
+                Create a review
               </Text>
-              </Link>   
-            <Link>
+            </Link>  
+            <Link to="/myreviews">
+              <Text style={styles.text}>
+                My Reviews
+              </Text>
+            </Link>
+            <Link>            
               <Text 
                 style={styles.text}
                 onPress={handleSignOut}
